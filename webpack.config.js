@@ -1,26 +1,59 @@
 const path = require('path')
-const DIST_DIR = path.resolve(__dirname, "./app.js")
-const DIST_SRC = path.resolve(__dirname, "public")
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports =  {
-	entry: DIST_DIR,
+	entry: [
+		// "webpack-hot-middleware/src",
+		"./src/app.js"
+	],
 	output: {
-		path: DIST_SRC,
-		filename: 'bundle.js',
-		publicPath: "/"
+		path: path.resolve(__dirname,"dist"),
+		filename: 'app.bundle.js',
+		publicPath: '/'
 	},
 	module: {
-		loaders: [
+		rules: [
 			{
-				test: /\.js$/,
+				test: /\.js$/, 
+				use: ['react-hot-loader','babel-loader'],
         		exclude: /node_modules/,
-				loader: "babel-loader",
-				query: {
-					presets: ["es2015", "react"]
-				}
+			},
+			{
+				test: /\.scss$/,
+				use: ExtractTextPlugin.extract({
+					fallback: "style-loader",
+					loader: ["css-loader","sass-loader"],
+					publicPath: "/dist"
+				})
 			}
 		]
 	},
+	devServer: {
+		contentBase: path.join(__dirname, "dist"),
+		publicPath: '/',
+		compress: true,
+		hot: true,
+		port: 3000,
+		stats: "errors-only"
+	},
+	plugins: [
+		new webpack.HotModuleReplacementPlugin(),
+		new HtmlWebpackPlugin({
+	    	title: "Movie Diary",
+	    	// minify: {
+	    	// 	collapseWhitespace: true
+	    	// },
+	    	// hash: true,
+	    	template: "./src/index.html", // Load a custom template (ejs by default see the FAQ for details)
+	  	}),
+		new ExtractTextPlugin({
+			filename: "app.css",
+			disable: false,
+			allChunks: true
+		})
+	],
 	// This lets us debug our react code in chrome dev tools. Errors will have lines and file names
 	// Without this the console says all errors are coming from just coming from bundle.js
 	devtool: "eval-source-map"

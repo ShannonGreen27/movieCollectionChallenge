@@ -5,9 +5,17 @@ const logger = require('morgan')
 const mongoose = require("mongoose")
 const methodOverride = require('method-override')
 const passport = require('passport')
-require("./passport")
+// require("./passport")
 const path = require('path')
 const session = require("express-session")
+
+// webpack setup for an existing server
+const webpackDevMiddleware = require("webpack-dev-middleware")
+const webpackHotMiddleware = require("webpack-hot-middleware")
+const webpack = require("webpack")
+const webpackConfig = require("./webpack.config.js")
+const compiler = webpack(webpackConfig)
+
 
 // Mongoose mpromise deprecated - use bluebird for promises
 const Promise = require("bluebird")
@@ -22,6 +30,9 @@ mongoose.Promise = Promise;
 // ================
 // instantiatize express
 const app = express()
+
+app.use(webpackDevMiddleware(compiler))
+app.use(webpackHotMiddleware(compiler))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -63,4 +74,4 @@ db.once("open", ()=> console.log("Mongoose connection successful."))
 const port = process.env.PORT || 3000;
 
 // listen on port 3000 when local
-app.listen(port, ()=> console.log("Listening on port %s", port))
+app.listen(port, ()=> console.log(`Listening on port ${port}`))
