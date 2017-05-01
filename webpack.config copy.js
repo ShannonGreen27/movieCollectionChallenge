@@ -4,14 +4,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports =  {
-	entry: {
-		bootstrap: "bootstrap-loader",
-		app: "./src/app/app.js"
-	},
+	entry: [
+		// "webpack-hot-middleware/src",
+		"./src/app.js"
+	],
 	output: {
 		path: path.resolve(__dirname,"dist"),
-		filename: '[name].bundle.js',
-		publicPath:""
+		filename: 'app.bundle.js',
+		publicPath: '/'
 	},
 	module: {
 		rules: [
@@ -24,26 +24,20 @@ module.exports =  {
 				test: /\.scss$/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
-					use: ["css-loader","sass-loader"],
+					loader: ["css-loader","sass-loader"],
 					publicPath: "/dist"
 				})
-			},
-		    { 
-		    	test: /\.(woff2?|svg)$/,
-				use: 'url-loader?limit=10000&name=fonts/[name].[ext]'
-			},
-		    { 
-		    	test: /\.(ttf|eot)$/,
-		    	use: 'file-loader?name=fonts/[name].[ext]'
-		    }
+			}
 		]
 	},
-	// devServer: {
-	// 	contentBase: path.join(__dirname, "dist"),
-	// 	compress: true,
-	// 	hot: true,
-	// 	stats: "errors-only"
-	// },
+	devServer: {
+		contentBase: path.join(__dirname, "dist"),
+		publicPath: '/',
+		compress: true,
+		hot: true,
+		port: 3000,
+		stats: "errors-only"
+	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({
@@ -55,7 +49,7 @@ module.exports =  {
 	    	template: "./src/index.html", // Load a custom template (ejs by default see the FAQ for details)
 	  	}),
 		new ExtractTextPlugin({
-			filename: "./css/[name].css",
+			filename: "app.css",
 			disable: false,
 			allChunks: true
 		})

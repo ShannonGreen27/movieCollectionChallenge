@@ -13,7 +13,7 @@ const session = require("express-session")
 const webpackDevMiddleware = require("webpack-dev-middleware")
 const webpackHotMiddleware = require("webpack-hot-middleware")
 const webpack = require("webpack")
-const webpackConfig = require("./webpack.config.js")
+const webpackConfig = require("../webpack.config.js")
 const compiler = webpack(webpackConfig)
 
 
@@ -31,7 +31,12 @@ mongoose.Promise = Promise;
 // instantiatize express
 const app = express()
 
-app.use(webpackDevMiddleware(compiler))
+app.use(webpackDevMiddleware(compiler, {
+	publicPath: webpackConfig.output.publicPath,
+	hot: true,
+	stats: 'errors-only',
+	compress: true
+}))
 app.use(webpackHotMiddleware(compiler))
 
 // view engine setup
@@ -51,24 +56,24 @@ app.use(methodOverride('_method'))
 	.use(passport.initialize())
 	.use(passport.session())
 
-// Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static(path.join(__dirname, 'public')))
+// Serve static content for the app from the "dist" directory in the application directory.
+app.use(express.static(path.join(__dirname, 'dist')))
 
 // // what to send based on route
 // app.use('/user', clients_controller)
 // app.use('/search', search_controller)
 
 // Database configuration with mongoose. Uses local database when not in production
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/homedb")
-const db = mongoose.connection
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/movieDB")
+// const db = mongoose.connection
 
-// Show any mongoose errors
-db.on("error", (error)=> {
-  console.log("Mongoose Error: ", error)
-})
+// // Show any mongoose errors
+// db.on("error", (error)=> {
+//   console.log("Mongoose Error: ", error)
+// })
 
-// Once logged in to the db through mongoose, log a success message
-db.once("open", ()=> console.log("Mongoose connection successful."))
+// // Once logged in to the db through mongoose, log a success message
+// db.once("open", ()=> console.log("Mongoose connection successful."))
 
 // use port 3000 for development, otherwise use any available port during production
 const port = process.env.PORT || 3000;
