@@ -8,5 +8,20 @@ module.exports = {
     	return axios.get(queryURL).then(response => {
 			return response
 		})
+	},
+
+	addMovie(movie) {
+    	return axios.post("/movie/add", {
+    		params: {
+    			title: movie.Title,
+    			genre: movie.Genre,
+    			actors: movie.Actors,
+    			year: movie.Year,
+    			rating: movie.imdbRating
+    		}
+    	}).then(response => {
+			return response
+		})
 	}
+
 }
