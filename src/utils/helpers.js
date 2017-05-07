@@ -12,13 +12,11 @@ module.exports = {
 
 	addMovie(movie) {
     	return axios.post("/movie/add", {
-    		params: {
-    			title: movie.Title,
-    			genre: movie.Genre,
-    			actors: movie.Actors,
-    			year: movie.Year,
-    			rating: movie.imdbRating
-    		}
+    			Title: movie.Title,
+    			Genre: movie.Genre,
+    			Actors: movie.Actors,
+    			Year: movie.Year,
+    			Rating: movie.imdbRating
     	}).then(response => {
 			return response
 		})

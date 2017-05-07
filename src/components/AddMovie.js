@@ -1,6 +1,7 @@
 import React from "react"
 import OmdbSearchForm from "./AddMovie/OmdbSearchForm"
 import helpers from "../utils/helpers"
+import Diary from "./Diary"
 
 export default class AddMovie extends React.Component {
 
@@ -24,7 +25,7 @@ export default class AddMovie extends React.Component {
 
   handleAddMovie() {
     helpers.addMovie(this.state.result).then(data => {
-      console.log(data)
+      <Diary movies={data} />
     })
   }
 
@@ -38,12 +39,14 @@ export default class AddMovie extends React.Component {
         <div className="col-sm-12">
           <div className="panel-body">
             <OmdbSearchForm movieTitle={this.handleOmdbSubmit}/>
-            <h2>Title: {this.state.result.Title}</h2>
-            <h4>Genre: {this.state.result.Genre}</h4>
-            <h4>Actors: {this.state.result.Actors}</h4>
-            <h4>Year: {this.state.result.Year}</h4>
-            <h4>Rating: {this.state.result.imdbRating}</h4>
-            <img src={this.state.result.Poster}/>
+            <img className='pull-left' src={this.state.result.Poster}/>
+            <div className='pull-left'>
+              <h2>Title: {this.state.result.Title}</h2>
+              <h4>Genre: {this.state.result.Genre}</h4>
+              <h4>Actors: {this.state.result.Actors}</h4>
+              <h4>Year: {this.state.result.Year}</h4>
+              <h4>Rating: {this.state.result.imdbRating}</h4>
+            </div>
             {this.state.result==="" || this.state.result.Response === "False" ? "" : (
               <button
                 className="btn btn-primary"

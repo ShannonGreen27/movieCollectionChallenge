@@ -6,27 +6,27 @@ const Schema = mongoose.Schema
 // Create the Movie schema
 var MovieSchema = new Schema({
   // Just a string
-  title: {
+  Title: {
     type: String,
     required: true
   },
-  genre: {
+  Genre: {
     type: String,
     required: true,
   },
-  actors: {
+  Actors: {
     type: String,
     required: true,
   },
-  year: {
+  Year: {
     type: String,
     required: true
   },
-  rating: {
+  Rating: {
     type: String,
     required: true
   },
-  poster: {
+  Poster: {
     type: String
   }
 })

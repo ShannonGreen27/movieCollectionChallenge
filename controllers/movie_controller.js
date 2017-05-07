@@ -5,18 +5,20 @@ const Movie = require("../models/Movie.js")
 const mongoose = require("mongoose")
 
 // This will add a new movie to the database
-router.get("/add", (req, res) => {
-  console.log(res)
-    // Movie.create({
-    //   title: req,
-    //   genre: ,      
-    //   actors: ,
-    //   year: ,
-    //   rating:
-    // })
-    // .then(user => {
-
-    // })
+router.post("/add", (req, res) => {
+    Movie.create({
+      title: req.body.Title,
+      genre: req.body.Genre,
+      actors: req.body.Actors,
+      year: req.body.Year,
+      rating: req.body.Rating
+    })
+    .then(user => {
+      res.send(user)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
 })
 
 module.exports = router

@@ -6,12 +6,12 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 module.exports =  {
 	entry: {
 		bootstrap: "bootstrap-loader",
-		app: "./src/app/app.js"
+		app: "./src/index.js"
 	},
 	output: {
 		path: path.resolve(__dirname,"dist"),
 		filename: '[name].bundle.js',
-		publicPath:""
+		publicPath:"/"
 	},
 	module: {
 		rules: [

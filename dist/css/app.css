@@ -1,4 +1,7 @@
 body {
-  background-color: pink; }
+  background-color: white; }
+  body div div header ul li a.active, body div div header ul li a:hover {
+    color: #fff;
+    background: #3b80d1; }
   body p {
     color: red; }
