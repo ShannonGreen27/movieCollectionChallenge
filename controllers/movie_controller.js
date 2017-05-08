@@ -4,16 +4,36 @@ const router  = express.Router()
 const Movie = require("../models/Movie.js")
 const mongoose = require("mongoose")
 
+// This will populate the diary with all the movies added by the user
+router.get("/", (req, res) => {
+  // Grab every doc in the Movie array
+  Movie.find({})
+  .exec((err, result) => {
+    // Log any errors
+    if (err) {
+      console.log(err)
+    } else {
+      // result is passed to axios
+      res.send(result) 
+    }
+  })
+})
+
+
+
+
+
 // This will add a new movie to the database
 router.post("/add", (req, res) => {
     Movie.create({
-      title: req.body.Title,
-      genre: req.body.Genre,
-      actors: req.body.Actors,
-      year: req.body.Year,
-      rating: req.body.Rating
+      Title: req.body.Title,
+      Genre: req.body.Genre,
+      Actors: req.body.Actors,
+      Year: req.body.Year,
+      Rating: req.body.Rating
     })
     .then(user => {
+      // user is passed to axios
       res.send(user)
     })
     .catch(err =>{

@@ -1,3 +1,4 @@
+// Libs
 import axios from "axios"
 
 module.exports = {
@@ -20,6 +21,19 @@ module.exports = {
     	}).then(response => {
 			return response
 		})
-	}
+        .catch(err => {
+            console.log(err)
+        })
+	},
+
+    populateMovieDiary() {
+        return axios.get("/movie")
+        .then(response => {
+            return response
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
 
 }
