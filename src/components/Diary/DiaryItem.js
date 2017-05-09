@@ -1,4 +1,5 @@
 import React from "react"
+import DeleteMovieButton from "./DiaryItem/DeleteMovieButton"
 
 export default class DiaryItem extends React.Component {
 
@@ -12,6 +13,7 @@ export default class DiaryItem extends React.Component {
             <h4>Actors: {this.props.movie.Actors}</h4>
             <h4>Year: {this.props.movie.Year}</h4>
             <h4>Rating: {this.props.movie.Rating}</h4>
+            <DeleteMovieButton movieId={this.props.movie._id} />
           </div>
         </div>
       </div>    

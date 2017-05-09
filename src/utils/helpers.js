@@ -9,6 +9,9 @@ module.exports = {
     	return axios.get(queryURL).then(response => {
 			return response
 		})
+        .catch(err => {
+            console.log(err)
+        })
 	},
 
 	addMovie(movie) {
@@ -25,6 +28,15 @@ module.exports = {
             console.log(err)
         })
 	},
+
+    deleteMovieById(id) {
+        return axios.delete(`/movie/delete/${id}`).then(response => {
+            return response
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    },
 
     populateMovieDiary() {
         return axios.get("/movie")

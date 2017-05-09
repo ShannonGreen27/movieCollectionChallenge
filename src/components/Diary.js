@@ -14,8 +14,6 @@ export default class Diary extends React.Component {
     this.state = {
       results: []
     }
-
-    // this.handleAddMovie = this.handleAddMovie.bind(this)
   }
 
   componentDidMount() {

@@ -19,12 +19,8 @@ router.get("/", (req, res) => {
   })
 })
 
-
-
-
-
 // This will add a new movie to the database
-router.post("/add", (req, res) => {
+.post("/add", (req, res) => {
     Movie.create({
       Title: req.body.Title,
       Genre: req.body.Genre,
@@ -39,6 +35,21 @@ router.post("/add", (req, res) => {
     .catch(err =>{
       console.log(err)
     })
+})
+
+// This will delete a movie from the database by its id
+.delete("/delete/:id", (req, res) => {
+  // Use the movie id to find and delete it
+  Movie.findOneAndRemove({ "_id": req.params.id })
+  // Execute the above query
+  .exec((err, result) => {
+    // Log any errors
+    if (err) {
+      console.log(err)
+    } else {
+      res.send('Record removed successfully')
+    }
+  })
 })
 
 module.exports = router

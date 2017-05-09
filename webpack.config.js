@@ -55,7 +55,9 @@ module.exports =  {
 	    	template: "./src/index.html", // Load a custom template (ejs by default see the FAQ for details)
 	  	}),
 		new ExtractTextPlugin({
-			filename: "./css/[name].css",
+		    filename:  (getPath) => {
+		      return getPath('css/[name].css').replace('css/js', 'css');
+		    },
 			disable: false,
 			allChunks: true
 		})
