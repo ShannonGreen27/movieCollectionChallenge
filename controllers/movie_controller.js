@@ -42,12 +42,22 @@ router.get("/", (req, res) => {
   // Use the movie id to find and delete it
   Movie.findOneAndRemove({ "_id": req.params.id })
   // Execute the above query
-  .exec((err, result) => {
+  .exec((err, deletedRecord) => {
     // Log any errors
     if (err) {
       console.log(err)
     } else {
-      res.send('Record removed successfully')
+      // Grab every doc in the Movie array
+      Movie.find({})
+      .exec((error, result) => {
+        // Log any errors
+        if (error) {
+          console.log(err)
+        } else {
+          // result is passed to axios
+          res.send(result) 
+        }
+      })
     }
   })
 })

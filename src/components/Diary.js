@@ -14,6 +14,8 @@ export default class Diary extends React.Component {
     this.state = {
       results: []
     }
+
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
@@ -25,6 +27,11 @@ export default class Diary extends React.Component {
       })
   }
 
+  handleUpdate(data) {
+    this.setState({ 
+      results: data
+    })
+  }
 
 //Turn result into a components to render results to screen or show a message if nothing was found
 
@@ -32,7 +39,7 @@ export default class Diary extends React.Component {
   render() {
     return (
       <div>
-        {this.state.results.map(result => <DiaryItem key={result._id} movie={result} />)}
+        {this.state.results.map(result => <DiaryItem key={result._id} movie={result} update={this.handleUpdate} />)}
       </div>
     )
   }

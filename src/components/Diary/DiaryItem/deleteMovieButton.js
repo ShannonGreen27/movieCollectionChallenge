@@ -14,7 +14,7 @@ export default class DeleteMovieButton extends React.Component {
 
   handleDeleteMovie(props) {
      helpers.deleteMovieById(this.props.movieId).then(data => {
-
+      this.props.newState(data)
     })
   }
 
