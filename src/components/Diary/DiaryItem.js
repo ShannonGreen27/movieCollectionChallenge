@@ -3,6 +3,12 @@ import DeleteMovieButton from "./DiaryItem/DeleteMovieButton"
 
 export default class DiaryItem extends React.Component {
 
+  constructor() {
+    super()
+
+    this.handleNewState = this.handleNewState.bind(this)
+  }
+
   handleNewState(data) {
     this.props.update(data)
   }

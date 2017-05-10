@@ -15,7 +15,7 @@ export default class Diary extends React.Component {
       results: []
     }
 
-    this.handleDelete = this.handleDelete.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
   }
 
   componentDidMount() {
@@ -29,7 +29,7 @@ export default class Diary extends React.Component {
 
   handleUpdate(data) {
     this.setState({ 
-      results: data
+      results: data.data
     })
   }
 

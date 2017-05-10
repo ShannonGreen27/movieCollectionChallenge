@@ -31,8 +31,7 @@ module.exports = {
 
     deleteMovieById(id) {
         return axios.delete(`/movie/delete/${id}`).then(response => {
-            console.log(response)
-            // return response
+            return response
         })
         .catch(err => {
             console.log(err)
