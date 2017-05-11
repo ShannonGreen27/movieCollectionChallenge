@@ -38,9 +38,7 @@ export default class Diary extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.results.map(result => <DiaryItem key={result._id} movie={result} update={this.handleUpdate} />)}
-      </div>
+      <DiaryItem data={this.state.results} update={this.handleUpdate} />
     )
   }
 }
