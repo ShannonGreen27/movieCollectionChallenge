@@ -1,5 +1,7 @@
 import React from "react"
 import DeleteMovieButton from "./DiaryItem/DeleteMovieButton"
+import EditMovieButton from "./DiaryItem/EditMovieButton"
+import UpdateMovieButton from "./DiaryItem/UpdateMovieButton"
 
 export default class DiaryItem extends React.Component {
 
@@ -9,8 +11,8 @@ export default class DiaryItem extends React.Component {
       editing: null
     }
 
-    this.handleNewState = this.handleNewState.bind(this)
-    this.toggleEditing = this.toggleEditing.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
+    this.toggleEditing = this.toggleEditing.bind(this)   
   }
 
   toggleEditing(movieId) {
@@ -19,7 +21,7 @@ export default class DiaryItem extends React.Component {
     })
   }
 
-  handleNewState(data) {
+  handleUpdate(data) {
     this.props.update(data)
   }
 
@@ -30,11 +32,16 @@ export default class DiaryItem extends React.Component {
           <div className="col-sm-12">
             <div className='pull-left'>
               <h2>Title: </h2>
-              <input type='text' className="form-control" ref={ `Title_${ movie._id }` } name="Title" defaultValue={ movie.Title } onClick={this.toggleEditing.bind(null, movie._id)} />
-              <h4>Genre: {movie.Genre}</h4>
-              <h4>Actors: {movie.Actors}</h4>
-              <h4>Year: {movie.Year}</h4>
-              <h4>Rating: {movie.Rating}</h4>
+              <input type='text' className="form-control" ref={ `Title_${ movie._id }` } name="Title" defaultValue={ movie.Title } />
+              <h4>Genre: </h4>
+              <input type='text' className="form-control" ref={ `Genre_${ movie._id }` } name="Genre" defaultValue={ movie.Genre} />
+              <h4>Actors: </h4>
+              <input type='text' className="form-control" ref={ `Actors_${ movie._id }` } name="Actors" defaultValue={ movie.Actors } />
+              <h4>Year: </h4>
+              <input type='text' className="form-control" ref={ `Year_${ movie._id }` } name="Year" defaultValue={ movie.Year } />
+              <h4>Rating: </h4>
+              <input type='text' className="form-control" ref={ `Rating_${ movie._id }` } name="Rating" defaultValue={ movie.Rating } />
+              <UpdateMovieButton movieId={movie._id} />
             </div>
           </div>
         </div>
@@ -49,19 +56,14 @@ export default class DiaryItem extends React.Component {
               <h4>Actors: {movie.Actors}</h4>
               <h4>Year: {movie.Year}</h4>
               <h4>Rating: {movie.Rating}</h4>
-              <DeleteMovieButton movieId={movie._id} newState={this.handleNewState} />
+              <EditMovieButton movieId={movie._id} allowEdit={this.toggleEditing} />
+              <DeleteMovieButton movieId={movie._id} newState={this.handleUpdate} />
             </div>
           </div>
         </div>
       )
     }
   }
-      //   <li
-      //   onClick={ this.toggleEditing.bind( null, item._id ) }
-      //   key={ item._id }
-      //   className="list-group-item">
-      //   { `${ item.title } by ${ item.artist } (${ item.releaseYear })` }
-      // </li>;
 
   render() {
     return (
