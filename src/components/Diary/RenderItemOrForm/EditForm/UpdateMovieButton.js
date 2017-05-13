@@ -2,7 +2,7 @@
 import React from "react"
 
 // Helpers
-import helpers from "../../../utils/helpers"
+import helpers from "../../../../utils/helpers"
 
 export default class UpdateMovieButton extends React.Component {
 
@@ -23,23 +23,23 @@ export default class UpdateMovieButton extends React.Component {
   //   })
   // }
 
-  handleUpdate(event) {
-    let update = {}
+  // handleUpdate(event) {
+  //   let update = {}
 
-      update._id = this.props.movieId
-      update[ event.target.name ] = event.target.value
+  //     update._id = this.props.movieId
+  //     update[ event.target.name ] = event.target.value
 
-      console.log(update)
-      console.log(this.props.changes)
+  //     console.log(update)
+  //     console.log(this.props.changes)
 
-  }
+  // }
 
   render() {
     return (
       <button
         className="btn btn-warning"
         type="submit"
-         onClick={this.handleUpdate}
+        onClick={this.props.changes}
       >
         Update Movie
       </button>

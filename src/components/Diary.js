@@ -2,7 +2,7 @@
 import React from 'react'
 
 // Components
-import DiaryItem from "./Diary/DiaryItem"
+import RenderItemOrForm from "./Diary/RenderItemOrForm"
 
 // Helpers
 import helpers from "../utils/helpers"
@@ -38,7 +38,9 @@ export default class Diary extends React.Component {
 
   render() {
     return (
-      <DiaryItem data={this.state.results} update={this.handleUpdate} />
+      <div>
+        <RenderItemOrForm data={this.state.results} update={this.handleUpdate} />
+      </div>
     )
   }
 }

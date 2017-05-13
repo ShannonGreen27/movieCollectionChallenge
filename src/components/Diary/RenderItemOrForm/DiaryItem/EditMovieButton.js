@@ -2,18 +2,18 @@
 import React from "react"
 
 // Helpers
-import helpers from "../../../utils/helpers"
+import helpers from "../../../../utils/helpers"
 
 export default class EditMovieButton extends React.Component {
 
   constructor() {
     super()
 
-    this.handleEdit = this.handleEdit.bind(this)
+    this.handleMovieId = this.handleMovieId.bind(this)
   }
 
-  handleEdit(props) {
-    this.props.allowEdit(this.props.movieId)
+  handleMovieId(props) {
+    this.props.idToEdit(this.props.movieId)
   }
 
   render() {
@@ -21,7 +21,7 @@ export default class EditMovieButton extends React.Component {
       <button
         className="btn btn-success"
         type="submit"
-         onClick={this.handleEdit}
+         onClick={this.handleMovieId}
       >
         Edit Movie Info
       </button>

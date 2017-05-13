@@ -2,7 +2,7 @@
 import React from "react"
 
 // Helpers
-import helpers from "../../../utils/helpers"
+import helpers from "../../../../utils/helpers"
 
 export default class DeleteMovieButton extends React.Component {
  
@@ -12,9 +12,10 @@ export default class DeleteMovieButton extends React.Component {
     this.handleDeleteMovie = this.handleDeleteMovie.bind(this)
   }
 
-  handleDeleteMovie(props) {
+  handleDeleteMovie() {
      helpers.deleteMovieById(this.props.movieId).then(data => {
       this.props.newState(data)
+      // console.log(data)
     })
   }
 
