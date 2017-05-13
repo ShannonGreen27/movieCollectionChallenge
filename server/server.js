@@ -22,8 +22,6 @@ const Promise = require("bluebird")
 mongoose.Promise = Promise
 
 //model controllers
-// const search_controller = require("./controllers/search_controller")
-
 const movie_controller = require('../controllers/movie_controller')
 
 // Express settings
@@ -60,8 +58,6 @@ app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'dist')))
 
 // // what to send based on route
-// app.use('/user', clients_controller)
-// app.use('/search', search_controller)
 app.use('/movie', movie_controller)
 
 // Database configuration with mongoose. Uses local database when not in production
