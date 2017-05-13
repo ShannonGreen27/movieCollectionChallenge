@@ -32,12 +32,10 @@ export default class AddMovie extends React.Component {
 
   handleAddMovie() {
     helpers.addMovie(this.state.result).then(data => {
-
+      this.setState({
+        movieAdded: data
+      })
     })
-    this.setState({
-      movieAdded: true
-    })
-
   }
 
 //Turn result into a components to render results to screen or show a message if nothing was found

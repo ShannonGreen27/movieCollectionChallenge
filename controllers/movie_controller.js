@@ -26,23 +26,44 @@ router.get("/", (req, res) => {
       Genre: req.body.Genre,
       Actors: req.body.Actors,
       Year: req.body.Year,
-      Rating: req.body.Rating
+      Rating: req.body.Rating,
+      Poster: req.body.Poster
     })
-    .then(user => {
-      // user is passed to axios
-      res.send(user)
+    .then(result => {
+      // result is passed to axios
+      res.send(true)
     })
     .catch(err =>{
       console.log(err)
     })
 })
 
+// This will update a movie in the database
+.put("/update", (req, res) => {
+  Movie.update({ _id: req.body._id}, { $set: {
+    Title: req.body.Title,
+    Genre: req.body.Genre,
+    Actors: req.body.Actors,
+    Year: req.body.Year,
+    Rating: req.body.Rating
+  }}, ()=> {
+    Movie.find({})
+    .exec((error, result) => {
+      // Log any errors
+      if (error) {
+        console.log(err)
+      } else {
+        // result is passed to axios
+        res.send(result) 
+      }
+    })
+  })
+})
+
 // This will delete a movie from the database by its id
 .delete("/delete/:id", (req, res) => {
   // Use the movie id to find and delete it
-  Movie.findOneAndRemove({ "_id": req.params.id })
-  // Execute the above query
-  .exec((err, deletedRecord) => {
+  Movie.remove({ "_id": req.params.id }, (err)=> {
     // Log any errors
     if (err) {
       console.log(err)
@@ -52,10 +73,10 @@ router.get("/", (req, res) => {
       .exec((error, result) => {
         // Log any errors
         if (error) {
-          console.log(err)
+          console.log(error)
         } else {
           // result is passed to axios
-          res.send(result) 
+          res.send(result)
         }
       })
     }

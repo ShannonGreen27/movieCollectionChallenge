@@ -1,35 +1,35 @@
+// Libs
 import React from "react"
-import UpdateMovieButton from "./EditForm/UpdateMovieButton"
+
+// Helpers
+import helpers from "../../../utils/helpers"
 
 export default class EditForm extends React.Component {
 
   constructor() {
     super()
-    this.state = {
-      editing: null
-    }
 
-    // this.handleUpdate = this.handleUpdate.bind(this)
+    this.handlePerformUpdate = this.handlePerformUpdate.bind(this)
+    this.handleMovieUpdate = this.handleMovieUpdate.bind(this)
   }
 
-  // toggleEditing(movieId) {
-  //   this.setState({
-  //     editing: movieId
-  //   })
-  // }
+  handleMovieUpdate(movie) {
+    helpers.updateMovie(movie).then(data => {
+      this.props.updateState(data)
+    })
+  }
 
-  // handleUpdate(data) {
-  //   this.props.update(data)
-  // }
+  handlePerformUpdate() {
 
-  // handleGetUpdate(event) {
-  //   let update = {}
-
-  //     update._id = this.state.editing
-  //     update[ event.target.name ] = event.target.value
-
-  //     console.log(update)
-  // }
+    this.handleMovieUpdate({
+      _id: this.props.editing,
+      Title: this.refs[ `Title_${ this.props.movie._id }` ].value,
+      Genre: this.refs[ `Genre_${ this.props.movie._id }` ].value,
+      Actors: this.refs[ `Actors_${ this.props.movie._id }` ].value,
+      Year: this.refs[ `Year_${ this.props.movie._id }` ].value,
+      Rating: this.refs[ `Rating_${ this.props.movie._id }` ].value
+    })
+  }
 
   render() {
     return (
@@ -46,7 +46,13 @@ export default class EditForm extends React.Component {
             <input type='text' className="form-control" ref={ `Year_${ this.props.movie._id }` } name="Year" defaultValue={ this.props.movie.Year } />
             <h4>Rating: </h4>
             <input type='text' className="form-control" ref={ `Rating_${ this.props.movie._id }` } name="Rating" defaultValue={ this.props.movie.Rating } />
-            <UpdateMovieButton movieId={this.props.movie._id} changes={this.handleGetUpdate}/>
+            <button
+              className="btn btn-warning"
+              type="submit"
+              onClick={this.handlePerformUpdate}
+            >
+              Update Movie
+            </button>
           </div>
         </div>
       </div>

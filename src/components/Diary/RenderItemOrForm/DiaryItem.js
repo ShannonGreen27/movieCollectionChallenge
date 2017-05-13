@@ -1,6 +1,8 @@
+// Libs
 import React from "react"
-import DeleteMovieButton from "./DiaryItem/DeleteMovieButton"
-import EditMovieButton from "./DiaryItem/EditMovieButton"
+
+// Helpers
+import helpers from "../../../utils/helpers"
 
 export default class DiaryItem extends React.Component {
 
@@ -8,29 +10,44 @@ export default class DiaryItem extends React.Component {
     super()
 
     this.handleAllowEdit = this.handleAllowEdit.bind(this)
-    this.handleNewState = this.handleNewState.bind(this)
+    this.handleDeleteMovie = this.handleDeleteMovie.bind(this)
   }
 
-  handleNewState(data) {
-    this.props.updatedState(data)
+  handleAllowEdit() {
+    this.props.allowEdit(this.props.movie._id)
   }
 
-  handleAllowEdit(itemId) {
-    this.props.allowEdit(itemId)
+  handleDeleteMovie() {
+     helpers.deleteMovieById(this.props.movie._id).then(data => {
+      this.props.updateState(data)
+    })
   }
 
   render() {
     return (
       <div className="row">
         <div className="col-sm-12">
+          <img className='pull-left' src={this.props.movie.Poster}/>
           <div className='pull-left'>
             <h2>Title: {this.props.movie.Title}</h2>
             <h4>Genre: {this.props.movie.Genre}</h4>
             <h4>Actors: {this.props.movie.Actors}</h4>
             <h4>Year: {this.props.movie.Year}</h4>
             <h4>Rating: {this.props.movie.Rating}</h4>
-            <EditMovieButton movieId={this.props.movie._id} idToEdit={this.handleAllowEdit} />
-            <DeleteMovieButton movieId={this.props.movie._id} newState={this.handleNewState} />
+            <button
+              className="btn btn-success"
+              type="submit"
+              onClick={this.handleAllowEdit}
+            >
+              Edit Movie Info
+            </button>
+            <button
+              className="btn btn-danger"
+              type="submit"
+              onClick={this.handleDeleteMovie}
+            >
+              Remove from Library
+            </button>
           </div>
         </div>
       </div>

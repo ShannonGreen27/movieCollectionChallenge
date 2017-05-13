@@ -20,7 +20,8 @@ module.exports = {
     			Genre: movie.Genre,
     			Actors: movie.Actors,
     			Year: movie.Year,
-    			Rating: movie.imdbRating
+    			Rating: movie.imdbRating,
+                Poster: movie.Poster
     	}).then(response => {
 			return response
 		})
@@ -28,6 +29,16 @@ module.exports = {
             console.log(err)
         })
 	},
+
+    updateMovie(movie) {
+        return axios.put("/movie/update", movie)
+        .then(response => {
+            return response
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    },
 
     deleteMovieById(id) {
         return axios.delete(`/movie/delete/${id}`).then(response => {
