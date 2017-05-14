@@ -3,6 +3,7 @@ import React from 'react'
 
 // Components
 import RenderItemOrForm from "./Diary/RenderItemOrForm"
+import DatabaseSearchForm from "./Diary/DatabaseSearchForm"
 
 // Helpers
 import helpers from "../utils/helpers"
@@ -39,6 +40,7 @@ export default class Diary extends React.Component {
   render() {
     return (
       <div>
+        <DatabaseSearchForm data={this.handleUpdate} />
         <RenderItemOrForm data={this.state.results} update={this.handleUpdate} />
       </div>
     )

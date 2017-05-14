@@ -19,6 +19,19 @@ router.get("/", (req, res) => {
   })
 })
 
+.get("/search", (req, res) => {
+  let search = req.query.search
+  // Grab every doc in the Movie array
+  Movie.find({ $or: [ { Title: search }, { Genre: { $in: [search] } }, { Actors: { $in: [search] } }, { Year: search }, { Rating: search } ] })
+    .then(result => {
+      res.send(result)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
+
 // This will add a new movie to the database
 .post("/add", (req, res) => {
     Movie.create({
@@ -31,7 +44,7 @@ router.get("/", (req, res) => {
     })
     .then(result => {
       // result is passed to axios
-      res.send(true)
+      res.send(result)
     })
     .catch(err =>{
       console.log(err)

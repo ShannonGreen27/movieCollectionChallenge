@@ -39,9 +39,9 @@ export default class EditForm extends React.Component {
             <h2>Title: </h2>
             <input type='text' className="form-control" ref={ `Title_${ this.props.movie._id }` } name="Title" defaultValue={ this.props.movie.Title } />
             <h4>Genre: </h4>
-            <input type='text' className="form-control" ref={ `Genre_${ this.props.movie._id }` } name="Genre" defaultValue={ this.props.movie.Genre} />
+            <input type='text' className="form-control" ref={ `Genre_${ this.props.movie._id }` } name="Genre" defaultValue={ this.props.movie.Genre.join(", ")} />
             <h4>Actors: </h4>
-            <input type='text' className="form-control" ref={ `Actors_${ this.props.movie._id }` } name="Actors" defaultValue={ this.props.movie.Actors } />
+            <input type='text' className="form-control" ref={ `Actors_${ this.props.movie._id }` } name="Actors" defaultValue={ this.props.movie.Actors.join(", ") } />
             <h4>Year: </h4>
             <input type='text' className="form-control" ref={ `Year_${ this.props.movie._id }` } name="Year" defaultValue={ this.props.movie.Year } />
             <h4>Rating: </h4>

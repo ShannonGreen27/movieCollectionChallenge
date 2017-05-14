@@ -1,6 +1,10 @@
+// Libs
 import React from "react"
 
-export default class OmdbSearchForm extends React.Component {
+// Helpers
+import helpers from "../../utils/helpers"
+
+export default class DatabaseSearchForm extends React.Component {
 
   constructor() {
     super()
@@ -10,6 +14,7 @@ export default class OmdbSearchForm extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleFormatSubmit = this.handleFormatSubmit.bind(this)
   }
 
   handleChange(event) {
@@ -18,12 +23,29 @@ export default class OmdbSearchForm extends React.Component {
     })
   }
 
-  handleSubmit(event) {
+  handleFormatSubmit(event) {
     event.preventDefault()
 
-    this.props.movieTitle(this.state.text)
-    this.setState({ 
-      text: "" 
+    let searchTerm = this.state.text
+    let formattedSearchTerm = ''
+    searchTerm = searchTerm.split(" ")
+
+    for (let i = 0; i < searchTerm.length; i++) {
+      if (formattedSearchTerm === '') {
+        formattedSearchTerm = searchTerm[i].charAt(0).toUpperCase() + searchTerm[i].slice(1)
+      } else {
+        formattedSearchTerm = formattedSearchTerm + ' ' + searchTerm[i].charAt(0).toUpperCase() + searchTerm[i].slice(1)
+      }
+    }
+    this.handleSubmit(formattedSearchTerm)
+  }
+
+  handleSubmit(searchTerm) {
+    helpers.searchMovieDiary(searchTerm).then(data => {
+      this.props.data(data)
+      this.setState({ 
+        text: "" 
+      })
     })
   }
 
@@ -33,10 +55,10 @@ export default class OmdbSearchForm extends React.Component {
         <div className="col-sm-12">
           <div className="panel panel-default">
             <div className="panel-heading">
-              <h3 className="panel-title text-center">Movie Title Search</h3>
+              <h3 className="panel-title text-center">Search your Library</h3>
             </div>
             <div className="panel-body">
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.handleFormatSubmit}>
                 <div className="form-group">
                   <input
                     type="text"

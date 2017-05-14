@@ -24,14 +24,18 @@ export default class DiaryItem extends React.Component {
   }
 
   render() {
+    let Genre, Actors
+    Genre = this.props.movie.Genre.join(", ")
+    Actors = this.props.movie.Actors.join(", ")
+
     return (
       <div className="row">
         <div className="col-sm-12">
           <img className='pull-left' src={this.props.movie.Poster}/>
           <div className='pull-left'>
             <h2>Title: {this.props.movie.Title}</h2>
-            <h4>Genre: {this.props.movie.Genre}</h4>
-            <h4>Actors: {this.props.movie.Actors}</h4>
+            <h4>Genre: {Genre}</h4>
+            <h4>Actors: {Actors}</h4>
             <h4>Year: {this.props.movie.Year}</h4>
             <h4>Rating: {this.props.movie.Rating}</h4>
             <button

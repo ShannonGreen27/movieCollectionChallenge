@@ -23,10 +23,10 @@ export default class AddMovie extends React.Component {
 
   handleOmdbSubmit(searchTerm) {
     helpers.getMovieByName(searchTerm).then(data => {
-        this.setState({
-          result: data.data,
-          movieAdded: false
-        })
+      this.setState({
+        result: data.data,
+        movieAdded: false
+      })
     })
   }
 

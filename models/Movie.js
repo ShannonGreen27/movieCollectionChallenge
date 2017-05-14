@@ -11,11 +11,11 @@ var MovieSchema = new Schema({
     required: true
   },
   Genre: {
-    type: String,
+    type: Array,
     required: true,
   },
   Actors: {
-    type: String,
+    type: Array,
     required: true,
   },
   Year: {
