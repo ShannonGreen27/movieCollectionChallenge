@@ -6,7 +6,7 @@ import RenderItemOrForm from "./Diary/RenderItemOrForm"
 import DatabaseSearchForm from "./Diary/DatabaseSearchForm"
 
 // Helpers
-import helpers from "../utils/helpers"
+import helpers from "../../utils/helpers"
 
 export default class Diary extends React.Component {
 

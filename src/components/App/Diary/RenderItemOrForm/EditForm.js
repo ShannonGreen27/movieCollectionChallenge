@@ -2,7 +2,7 @@
 import React from "react"
 
 // Helpers
-import helpers from "../../../utils/helpers"
+import helpers from "../../../../utils/helpers"
 
 export default class EditForm extends React.Component {
 

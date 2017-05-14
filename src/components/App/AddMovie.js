@@ -5,7 +5,7 @@ import React from "react"
 import OmdbSearchForm from "./AddMovie/OmdbSearchForm"
 
 // Helpers
-import helpers from "../utils/helpers"
+import helpers from "../../utils/helpers"
 
 export default class AddMovie extends React.Component {
 

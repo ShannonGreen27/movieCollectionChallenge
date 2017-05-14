@@ -4,8 +4,8 @@ import { Route, Router, hashHistory } from 'react-router'
 
 // Components
 import App from '../components/App'
-import Diary from '../components/Diary'
-import addMovie from '../components/addMovie'
+import Diary from '../components/App/Diary'
+import addMovie from '../components/App/addMovie'
 
 // Routes
 const routes = (
