@@ -2,10 +2,11 @@
 import React from 'react'
 
 // Components
-import NavLink from './Navlink'
+import NavLink from './App/Navlink'
 
 export default class App extends React.Component {
 
+	// renders links to the components inside this 'container' with children props 
 	render() {
 		return (
 			<div className='container'>

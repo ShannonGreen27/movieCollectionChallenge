@@ -1,8 +1,10 @@
 // Libs
 import axios from "axios"
 
+// helper file made to allow separation of controller layer from view layer
 module.exports = {
 
+    // gets the movie name from the user and makes an api call to omdb to get information for the movie 
 	getMovieByName(movieName) {
     	const queryURL = `http://www.omdbapi.com/?t=${movieName}&y=&plot=short&r=json`
 
@@ -15,6 +17,7 @@ module.exports = {
             })
 	},
 
+    // adds the movie to the users library
 	addMovie(movie) {
 
     	return axios.post("/movie/add", {
@@ -35,6 +38,7 @@ module.exports = {
         })
 	},
 
+    //calls the database with the information needed to update a movie record
     updateMovie(movie) {
 
         movie.Genre = movie.Genre.split(", ")
@@ -49,6 +53,7 @@ module.exports = {
             })
     },
 
+    //calls the database to delete a movie record by its id
     deleteMovieById(id) {
         return axios.delete(`/movie/delete/${id}`)
             .then(response => {
@@ -59,6 +64,7 @@ module.exports = {
             })
     },
 
+    //Populates the users library with initial data. Performed once the compnent it rendered.
     populateMovieDiary() {
         return axios.get("/movie")
             .then(response => {
@@ -69,6 +75,7 @@ module.exports = {
             })
     },
 
+    //calls the database with the information needed to return the records that match
     searchMovieDiary(searchTerm) {
         return axios.get("/movie/search", {
             params: {
@@ -82,6 +89,4 @@ module.exports = {
             console.log(err)
         })
     }
-
-
 }

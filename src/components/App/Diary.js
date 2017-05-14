@@ -16,9 +16,11 @@ export default class Diary extends React.Component {
       results: []
     }
 
+    // Must use bind this or the methods created will refer to the react object and not the class you created
     this.handleUpdate = this.handleUpdate.bind(this)
   }
 
+  // Once component is rendered to the page this will execute. Makes a call to the database to load in any movies in the users library
   componentDidMount() {
     helpers.populateMovieDiary()
       .then(result => {
@@ -28,15 +30,14 @@ export default class Diary extends React.Component {
       })
   }
 
+  // Takes care of any updates to the component
   handleUpdate(data) {
     this.setState({ 
       results: data.data
     })
   }
 
-//Turn result into a components to render results to screen or show a message if nothing was found
-
-
+  // Renders components
   render() {
     return (
       <div>

@@ -31,7 +31,6 @@ router.get("/", (req, res) => {
     })
 })
 
-
 // This will add a new movie to the database
 .post("/add", (req, res) => {
     Movie.create({

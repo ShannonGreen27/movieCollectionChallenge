@@ -9,18 +9,20 @@ export default class EditForm extends React.Component {
   constructor() {
     super()
 
+    // Must use bind this or the methods created will refer to the react object and not the class you created
     this.handlePerformUpdate = this.handlePerformUpdate.bind(this)
     this.handleMovieUpdate = this.handleMovieUpdate.bind(this)
   }
 
+  //method that executes the helper to update the movie record in the database. callback passes up the new state 
   handleMovieUpdate(movie) {
     helpers.updateMovie(movie).then(data => {
       this.props.updateState(data)
     })
   }
 
+  //method that pulls in the refs for the movie being edited and passes the object to the handleMovieUpdate
   handlePerformUpdate() {
-
     this.handleMovieUpdate({
       _id: this.props.editing,
       Title: this.refs[ `Title_${ this.props.movie._id }` ].value,
@@ -31,6 +33,7 @@ export default class EditForm extends React.Component {
     })
   }
 
+  //renders the edit html to edit the movie information
   render() {
     return (
       <div className="row">

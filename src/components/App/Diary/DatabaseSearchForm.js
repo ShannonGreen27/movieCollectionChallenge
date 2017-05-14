@@ -12,17 +12,22 @@ export default class DatabaseSearchForm extends React.Component {
       text: ''
     }
 
+    // Must use bind this or the methods created will refer to the react object and not the class you created
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleFormatSubmit = this.handleFormatSubmit.bind(this)
   }
 
+  // manipulates the the input field to show what is being typed
   handleChange(event) {
     this.setState({
       text: event.target.value      
     })
   }
 
+  // Takes in the search term and capitalizes the first letter of each word found. 
+  // This is to match how the data looks in the database.
+  // The result of this is then passed to handleSubmit
   handleFormatSubmit(event) {
     event.preventDefault()
 
@@ -40,6 +45,8 @@ export default class DatabaseSearchForm extends React.Component {
     this.handleSubmit(formattedSearchTerm)
   }
 
+  // Calls the helper that will check the database for the term entered and returns the result.
+  // Passes the result up via a callback on props and resets the state of this component.
   handleSubmit(searchTerm) {
     helpers.searchMovieDiary(searchTerm).then(data => {
       this.props.data(data)
@@ -49,6 +56,7 @@ export default class DatabaseSearchForm extends React.Component {
     })
   }
 
+  // renders the search bar
   render() {
     return (
       <div className="row">

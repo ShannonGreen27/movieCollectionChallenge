@@ -16,7 +16,6 @@ const webpack = require("webpack")
 const webpackConfig = require("../webpack.config.js")
 const compiler = webpack(webpackConfig)
 
-
 // Mongoose mpromise deprecated - use bluebird for promises
 const Promise = require("bluebird")
 mongoose.Promise = Promise

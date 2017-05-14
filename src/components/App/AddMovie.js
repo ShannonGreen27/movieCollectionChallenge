@@ -17,10 +17,12 @@ export default class AddMovie extends React.Component {
       error: 'No Results Found'
     }
 
+    // Must use bind this or the methods created will refer to the react object and not the class you created
     this.handleOmdbSubmit = this.handleOmdbSubmit.bind(this)
     this.handleAddMovie = this.handleAddMovie.bind(this)
   }
 
+  // calls helper that makes a call to omdb
   handleOmdbSubmit(searchTerm) {
     helpers.getMovieByName(searchTerm).then(data => {
       this.setState({
@@ -30,6 +32,9 @@ export default class AddMovie extends React.Component {
     })
   }
 
+  // calls helper that adds a new movie to the database
+  // if there is a responce by the helper it sets the value of movie added to true
+  // with a movieAdded set to true a message is displayed to let the user know that the movie was added.
   handleAddMovie() {
     helpers.addMovie(this.state.result).then(data => {
       this.setState({
@@ -38,10 +43,7 @@ export default class AddMovie extends React.Component {
     })
   }
 
-//Turn result into a components to render results to screen or show a message if nothing was found
-
-
-
+  // Renders the movie data
   render() {
     return (
       <div className="row">
