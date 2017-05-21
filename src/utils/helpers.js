@@ -6,7 +6,7 @@ module.exports = {
 
     // gets the movie name from the user and makes an api call to omdb to get information for the movie 
 	getMovieByName(movieName) {
-    	const queryURL = `http://www.omdbapi.com/?t=${movieName}&y=&plot=short&r=json`
+    	const queryURL = `http://www.omdbapi.com/?apikey=1be39fa9&t=${movieName}&y=&plot=short&r=json`
 
     	return axios.get(queryURL)
             .then(response => {
